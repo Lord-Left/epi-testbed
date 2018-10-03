@@ -1,2 +1,2 @@
 # epi-testbed
-A place for me to experiment with solutions to EPI Problems 
+A place for me to experiment with solutions to EPI Problems (for Java). 
