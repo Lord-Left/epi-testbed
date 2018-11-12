@@ -23,20 +23,26 @@ public class BinaryTree<T> {
 
 	// recursive addition function
 
-	public void add(T d, BinaryTreeNode n) {
+	public boolean add(T d, BinaryTreeNode n) {
+
+		boolean foundNull = false; 
 
 		if (n == null) {
 			n = new BinaryTreeNode(d);
-			return; 
+			return true;
 		} else if(n.left == null) {
 			n.left = new BinaryTreeNode(d);
+			return true;
 		} else if (n.right == null) {
 			n.right = new BinaryTreeNode(d);
+			return true;
 		} else {
 			// n and child nodes are full. now we recurse
-			add(d, n.left);
-			add(d, n.right);
+			foundNull = add(d, n.left);
+			if (!foundNull) { add(d, n.right); };
 		}
+
+		return foundNull; 
 
 	}
 
