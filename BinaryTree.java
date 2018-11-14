@@ -56,4 +56,29 @@ public class BinaryTree<T> {
 		System.out.println(n.data);
 		inOrderPrint(n.right);
 	}
+
+	// BFS
+	public void bFS(BinaryTreeNode n, boolean isRoot) {
+
+		if(n == null) {
+			return;
+		}
+
+		if(isRoot) { printNode(n); }
+
+		printNode(n.left);
+		printNode(n.right);
+
+		bFS(n.left, false);
+		bFS(n.right, false);
+		
+	}
+
+	// BFS & DFS helper function
+	public void printNode(BinaryTreeNode n) {
+
+		if(n != null) {
+			System.out.println(n.data);
+		}
+	}
 }

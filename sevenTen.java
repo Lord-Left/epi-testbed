@@ -3,7 +3,6 @@ import java.util.List;
 
 
 public class sevenTen {
-
     public static void main(String[] args) {
         LinkedList<Integer> testList = new LinkedList<>();
 

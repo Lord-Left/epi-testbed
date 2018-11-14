@@ -25,8 +25,8 @@ public class NodeList {
     public void addNode(int num) {
 
         Node added = new Node(num);
-        added.next = head.next;
-        head.next = added; 
+        added.next = head;
+        head = added; 
     }
     
     public void printList() {
@@ -68,6 +68,25 @@ public class NodeList {
         }
 
         
+    }
+
+    public void listReverse() {
+
+        Node prev, current, temp; // initalized to null
+
+        current = head;
+        prev = null;
+
+        while(current != null) {
+            temp = current.next;
+            current.next = prev;
+            prev = current; // will be null initally  
+            current = temp; 
+        }
+
+        head = prev; 
+
+
     }
 
 
