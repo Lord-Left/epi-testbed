@@ -81,4 +81,20 @@ public class BinaryTree<T> {
 			System.out.println(n.data);
 		}
 	}
+
+	// recursive binary tree inverter
+	public void mirrorTree(BinaryTreeNode n) {
+
+		if (n == null) {
+			return;
+		}
+
+		BinaryTreeNode temp = n.left;
+		n.left = n.right;
+		n.right = temp;
+
+		mirrorTree(n.left);
+		mirrorTree(n.right);
+
+	}
 }

@@ -11,8 +11,11 @@ public class BinTreeTester {
         testTree.add(8, testTree.root);
         System.out.println("---- LDR ----");
         testTree.inOrderPrint(testTree.root);
-        System.out.println("---- BFS ----");
-        testTree.bFS(testTree.root, true);
+        // System.out.println("---- BFS ----");
+        // testTree.bFS(testTree.root, true);
+        testTree.mirrorTree(testTree.root);
+        System.out.println("---- LDR - INVERT ----");
+        testTree.inOrderPrint(testTree.root);
 
 
     }
