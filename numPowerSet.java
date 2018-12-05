@@ -5,11 +5,12 @@ public class numPowerSet {
     
     public static void main(String[] args) {
         
-        int[] nums = {2,3,6,7};
-        int t = 7;
+        int[] nums = {2,3,5};
+        int t = 8;
 
         List<List<Integer>> result = new ArrayList<>();
         genPS(nums, t, result, new ArrayList<>(), true);
+
         System.out.println(result);
 
 
@@ -28,13 +29,17 @@ public class numPowerSet {
 
             for(int i = 0; i < num.length; i++) {
 
+
                 if(!tmp.isEmpty() && num[i] >= tmp.get(tmp.size()-1)) {
                     tmp.add(num[i]);
+                    // System.out.println(num[i]);
                 } else if(!tmp.isEmpty() && num[i] < tmp.get(tmp.size()-1)) {
-                    return; 
+                    continue;  
                 } else {
                     tmp.add(num[i]);
                 }
+
+                // tmp.add(num[i]);
 
                 genPS(num, target, list, tmp, keepExploring);
                 tmp.remove(tmp.size()-1); // un-choose last option
@@ -51,6 +56,7 @@ public class numPowerSet {
         int ret = 0;
 
         for(int x: ls) {
+            System.out.print(x + " ");
             ret += x;
         }
 

@@ -6,8 +6,11 @@ public class generateParenthesis {
 
     public static void main(String[] args) {
 
-        System.out.print(genP(2));
-        // genP(2);
+
+        // System.out.println(genP(1));
+        // System.out.println(genP(2));
+        // System.out.println(genP(3));
+        System.out.println(genP(4));
 
 
     }
@@ -16,25 +19,24 @@ public class generateParenthesis {
     public static List<String> genP(int n) {
 
         StringBuilder tmp = new StringBuilder();
-        List<String> ret = new LinkedList<>();
+        HashSet<String> s = new HashSet<>();
 
-        genPRecurse(n, ret, 1, tmp, 0);
+        genPRecurse(n, s, 1, tmp, 0);
+
+        List<String> ret = new ArrayList<>(s);
+        Comparator<String> c = Comparator.comparing(String::toString);
+        ret.sort(c);
 
         return ret;
 
     } 
 
-    /*
-    leftParen 
-    middle = leftParen +1
-    rightParen = leftParen + 2
-    */
 
     // recursive helper function
-    public static void genPRecurse(int n, List<String> s, int count, StringBuilder mut, int leftParen) {
+    public static void genPRecurse(int n, HashSet<String> s, int count, StringBuilder mut, int left) {
 
-        int middle = leftParen + 1;
-        int rightParen = leftParen + 2;
+        int middle = left + 1;
+        int right = left + 2;
 
         // base case
         if (count == 1) {
@@ -44,34 +46,56 @@ public class generateParenthesis {
         if (count == n) {
             s.add(mut.toString());
             return;
-        }
+        } 
 
         // use a for loop - for each cycle of i, choose to explore a path and insert into string builder
-        for(int i = 1; i <= n; i++) {
+        for(int i = 1; i <= 4; i++) {
 
             if(i == 1) {
                 // prepend
-                // int off = mut.indexOf("()"); // find first instance of ()
-                mut.insert(leftParen, "()");
-                // System.out.println("i == 1 " + mut);
-                genPRecurse(n, s, count+1, mut, leftParen);
+                mut.insert(left, "()");
+                genPRecurse(n, s, count+1, mut, left);
+                // System.out.println("i : " + i + " mut : " + mut + " count : " + count);
+                mut.delete(left, right);
 
             } else if (i == 2) {
-                // int off = mut.indexOf("()");
+
                 mut.insert(middle, "()");
-                // System.out.println("i == 2 " + mut);
                 genPRecurse(n, s, count+1, mut, middle);
+                // System.out.println("i : " + i + " mut : " + mut + " count : " + count);
+                mut.delete(middle, right+1);
 
             } else if (i == 3) {
 
-                // int off = mut.indexOf("()");
-                mut.insert(rightParen, "()");
-                // System.out.println("i == 3 " + mut);
-                genPRecurse(n, s, count+1, mut, rightParen);
+                mut.insert(right, "()");
+                genPRecurse(n, s, count+1, mut, right);
+                // System.out.println("i : " + i + " mut : " + mut + " count : " + count);
+                mut.delete(right, right+2);
 
-            }
+            } // else if (i == 4 ) {
+
+            //     // explore edge case
+            //     int off = mut.indexOf("()");
+
+            //     if(off == 0) {
+            //         mut.insert(off, "()");
+            //         genPRecurse(n, s, count+1, mut, off+1);
+            //         System.out.println("i : " + i + " mut : " + mut + " count : " + count);
+
+            //         mut.delete(off, off+2); }
+                
+            //     // off = mut.lastIndexOf(" ()");
+            //     // mut.insert(off, "()");
+            //     // genPRecurse(n, s, count+1, mut, off+1);
+            //     // System.out.println("i : " + i + " mut : " + mut + " count : " + count);
+
+            //     // mut.delete(off, off+2);
+
+            // }
 
         }
+
+
         
     }
 }
